@@ -1,0 +1,75 @@
+copy 100 r1 
+store r1 10
+copy 101 r1 
+store r1 102 
+copy 102 r1 
+store r1 10 
+copy 103 r1 
+store r1 104 
+copy 104 r1 
+store r1 10 
+copy 105 r1 
+store r1 106 
+copy 106 r1 
+store r1 10 
+copy 107 r1 
+store r1 108 
+copy 108 r1 
+store r1 10 
+copy 109 r1 
+store r1 110 
+copy 110 r1 
+store r1 10 
+copy 111 r1 
+store r1 112 
+copy 112 r1 
+store r1 10 
+copy 113 r1 
+store r1 114 
+copy 114 r1 
+store r1 10 
+copy 115 r1 
+store r1 116 
+copy 116 r1 
+store r1 10 
+copy 117 r1 
+store r1 118 
+copy 118 r1 
+store r1 10 
+copy 119 r1 
+store r1 120 
+copy 120 r1 
+store r1 10 
+load r0 r5 100 
+load r0 r1 101 
+load r1 r6 0 
+math add r5 r6 r5 
+load r0 r1 103 
+load r1 r6 0 
+math add r5 r6 r5 
+load r0 r1 105 
+load r1 r6 0 
+math add r5 r6 r5 
+load r0 r1 107 
+load r1 r6 0 
+math add r5 r6 r5 
+load r0 r1 109 
+load r1 r6 0 
+math add r5 r6 r5 
+load r0 r1 111 
+load r1 r6 0 
+math add r5 r6 r5 
+load r0 r1 113  
+load r1 r6 0  
+math add r5 r6 r5 
+load r0 r1 115 
+load r1 r6 0 
+math add r5 r6 r5 
+load r0 r1 117 
+load r1 r6 0 
+math add r5 r6 r5 
+load r0 r1 119 
+load r1 r6 0 
+math add r5 r6 r5 
+copy 205 r21  
+store r5 r21 0 

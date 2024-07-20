@@ -1,0 +1,42 @@
+copy 10 R1 
+copy 10 R2
+copy 10 R3 
+copy 10 R4  
+copy 10 R5  
+copy 10 R6  
+copy 10 R7  
+copy 10 R8  
+copy 10 R9  
+copy 10 R10  
+copy 10 R11  
+copy 10 R12  
+copy 10 R13  
+copy 10 R14  
+copy 10 R15  
+copy 10 R16  
+copy 10 R17  
+copy 10 R18  
+copy 10 R19  
+copy 10 R20 
+math add r1 r2 r1 
+math add r1 r3 r1 
+math add r1 r4 r1 
+math add r1 r5 r1 
+math add r1 r6 r1 
+math add r1 r7 r1 
+math add r1 r8 r1 
+math add r1 r9 r1  
+math add r1 r10 r1  
+math add r1 r11 r1  
+math add r1 r12 r1 
+math add r1 r13 r1  
+math add r1 r14 r1  
+math add r1 r15 r1  
+math add r1 r16 r1  
+math add r1 r17 r1  
+math add r1 r18 r1  
+math add r1 r19 r1  
+math add r1 r20 r1 
+copy 205 r21 
+store r1 r21 0 
+halt 
