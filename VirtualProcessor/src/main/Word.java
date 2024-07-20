@@ -1,3 +1,4 @@
+package main;
 import java.util.LinkedList;
 
 public class Word {
@@ -149,14 +150,14 @@ public class Word {
      * Sets this word equal to an integer value
      */
     public void set(int value) {
-        boolean isNegative = false;
+        var isNegative = false;
         if (value < 0) {
             isNegative = true;
             value *= -1;
             value--;
         }
-        int quotient = value;
-        LinkedList<Boolean> list = new LinkedList<>();
+        var quotient = value;
+        var list = new LinkedList<Boolean>();
         for (int i = 1; i < 32; i++) {
             list.add(quotient % 2 == 1);
             quotient /= 2;
@@ -170,7 +171,7 @@ public class Word {
     }
 
     public String toString() {
-        String s = "";
+        var s = "";
         for (Bit b : word)
             s += b.getValue() ? "t" : "f";
         return s;

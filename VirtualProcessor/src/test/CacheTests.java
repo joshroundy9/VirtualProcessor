@@ -1,3 +1,4 @@
+package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.charset.StandardCharsets;
@@ -8,6 +9,13 @@ import java.util.List;
 
 import org.junit.Test;
 
+import main.Lexer;
+import main.MainMemory;
+import main.Parser;
+import main.Processor;
+import main.Token;
+import main.Word;
+
 public class CacheTests {
     /*MUST RUN FULL CLASS TEST OR MAINMEMORY DOES NOT RESET FROM PREVIOUS RUNS */
     @Test
@@ -15,10 +23,10 @@ public class CacheTests {
     {
         MainMemory.refreshMemory();
         System.out.println("START TEST");
-        List<String> lines = Files.readAllLines(Paths.get("C:/Users/milli/Dropbox/ICSI 404/404/src/assembly"),
+        var lines = Files.readAllLines(Paths.get("C:/Users/milli/Dropbox/ICSI 404/404/src/assembly"),
                 StandardCharsets.UTF_8);
 
-        Lexer lex = new Lexer();
+        var lex = new Lexer();
         for (int i = 0; i < lines.size(); i++) {
             lex.lex(lines.get(i), i + 1, lines.size());
         }
@@ -26,11 +34,11 @@ public class CacheTests {
         for (Token token : lex.getTokens()) {
             token.print();
         }
-        LinkedList<Token> tokenList = lex.getTokens();
-        Parser parser = new Parser(tokenList);
+        var tokenList = lex.getTokens();
+        var parser = new Parser(tokenList);
         parser.parse();
-        Processor processor = new Processor();
-        LinkedList<Word> program = parser.getProgram();
+        var processor = new Processor();
+        var program = parser.getProgram();
         for(int i = 0;i<program.size();i++)
         {
             System.out.println(program.get(i));
@@ -46,10 +54,10 @@ public class CacheTests {
     {
         MainMemory.refreshMemory();
         System.out.println("START TEST");
-        List<String> lines = Files.readAllLines(Paths.get("C:/Users/milli/Dropbox/ICSI 404/404/src/assembly2"),
+        var lines = Files.readAllLines(Paths.get("C:/Users/milli/Dropbox/ICSI 404/404/src/assembly2"),
                 StandardCharsets.UTF_8);
 
-        Lexer lex = new Lexer();
+        var lex = new Lexer();
         for (int i = 0; i < lines.size(); i++) {
             lex.lex(lines.get(i), i + 1, lines.size());
         }
@@ -57,11 +65,11 @@ public class CacheTests {
         for (Token token : lex.getTokens()) {
             token.print();
         }
-        LinkedList<Token> tokenList = lex.getTokens();
-        Parser parser = new Parser(tokenList);
+        var tokenList = lex.getTokens();
+        var parser = new Parser(tokenList);
         parser.parse();
-        Processor processor = new Processor();
-        LinkedList<Word> program = parser.getProgram();
+        var processor = new Processor();
+        var program = parser.getProgram();
         for(int i = 0;i<program.size();i++)
         {
             MainMemory.write(new Word(i), program.get(i));
@@ -74,10 +82,10 @@ public class CacheTests {
     {
         MainMemory.refreshMemory();
         System.out.println("START TEST");
-        List<String> lines = Files.readAllLines(Paths.get("C:/Users/milli/Dropbox/ICSI 404/404/src/assembly3"),
+        var lines = Files.readAllLines(Paths.get("C:/Users/milli/Dropbox/ICSI 404/404/src/assembly3"),
                 StandardCharsets.UTF_8);
 
-        Lexer lex = new Lexer();
+        var lex = new Lexer();
         for (int i = 0; i < lines.size(); i++) {
             lex.lex(lines.get(i), i + 1, lines.size());
         }
@@ -85,11 +93,11 @@ public class CacheTests {
         for (Token token : lex.getTokens()) {
             token.print();
         }
-        LinkedList<Token> tokenList = lex.getTokens();
-        Parser parser = new Parser(tokenList);
+        var tokenList = lex.getTokens();
+        var parser = new Parser(tokenList);
         parser.parse();
-        Processor processor = new Processor();
-        LinkedList<Word> program = parser.getProgram();
+        var processor = new Processor();
+        var program = parser.getProgram();
         for(int i = 0;i<program.size();i++)
         {
             MainMemory.write(new Word(i), program.get(i));

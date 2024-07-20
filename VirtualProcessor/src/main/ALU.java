@@ -1,3 +1,4 @@
+package main;
 import java.util.LinkedList;
 
 public class ALU {
@@ -68,7 +69,6 @@ public class ALU {
     }
 
     public Word add4(Word word1, Word word2, Word word3, Word word4) {
-        Word[] inputs = new Word[] { word1, word2, word3, word4 };
         Word output = new Word();
         for (int i = 31; i >= 1; i--) {
             int trueCounter = 0;
@@ -83,35 +83,13 @@ public class ALU {
         return output;
     }
 
-    /*
-     * Sets a bit at a position in a word to true, if it has to carry left it does
-     * so.
-     */
-    private void carryLeft(int position, Word output) {
-        if (output.getBit(position).getValue()) {
-            while (output.getBit(position).getValue()) {
-
-            }
-            for (int i = position; i >= 1; i--) {
-                if (!output.getBit(i).getValue()) {
-                    output.getBit(i).set();
-                    break;
-                } else {
-                    output.getBit(i).clear();
-                }
-            }
-        } else {
-            output.getBit(position).set();
-        }
-    }
-
     /**
      * @param word1 First word to be added.
      * @param word2 Second word to be added.
      * @return Word Result of adding the two words.
      */
     private Word add2(Word word1, Word word2) {
-        Word result = new Word();
+        var result = new Word();
         // if both numbers are positive or negative
         if (!word1.getBit(0).xor(word2.getBit(0)).getValue()) {
             boolean bothPositive = !word1.getBit(0).getValue();
@@ -120,7 +98,7 @@ public class ALU {
                 word1 = getTwosCompliment(word1);
                 word2 = getTwosCompliment(word2);
             } // if both are positive do not modify and directly input
-            boolean carry = false;
+            var carry = false;
             for (int i = 31; i >= 1; i--) {
                 carry = add2Bits(word1.getBit(i), word2.getBit(i), result.getBit(i), carry);
             }
@@ -139,15 +117,15 @@ public class ALU {
              * boolean positiveLarger =
              * !isLeftLarger(word1Positive ? word1 : word2, word1Positive ? word2 : word1);
              */
-            Word positive = word1.getBit(0).getValue() ? word2 : word1,
-                    negative = word1.getBit(0).getValue() ? word1 : word2;
-            boolean positiveLarger = isPositiveLarger(positive, negative);
+            var positive = word1.getBit(0).getValue() ? word2 : word1;
+            var negative = word1.getBit(0).getValue() ? word1 : word2;
+            var positiveLarger = isPositiveLarger(positive, negative);
             // is the positive number larger?
             if (!positiveLarger) {
                 word1 = getTwosCompliment(word1);
                 word2 = getTwosCompliment(word2);
             }
-            boolean carry = false;
+            var carry = false;
             for (int i = 31; i >= 1; i--) {
                 carry = add2Bits(word1.getBit(i), word2.getBit(i), result.getBit(i), carry);
             }
@@ -199,7 +177,7 @@ public class ALU {
          * loops down each number and finds if both corresponding
          * bits are zeros (negative is larger) or ones (positive is larger)
          */
-        Word twosComplement = getTwosCompliment(negative);
+        var twosComplement = getTwosCompliment(negative);
         for (int i = 1; i < 32; i++) {
             if (positive.getBit(i).getValue() && !twosComplement.getBit(i).getValue())
                 return true;
@@ -216,10 +194,10 @@ public class ALU {
      * @return Word Twos compliment of the word input.
      */
     private Word getTwosCompliment(Word word) {
-        Word returnValue = new Word();
+        var returnValue = new Word();
         int i;
-        boolean allBitsTheSame = true;
-        Bit previousBit = word.getBit(1);
+        var allBitsTheSame = true;
+        var previousBit = word.getBit(1);
         // inverts all bits
         for (i = 1; i < 32; i++) {
             Bit currentBit = word.getBit(i);
@@ -265,28 +243,28 @@ public class ALU {
      * Multiplies op1 with op2
      */
     private void mutliply() {
-        Bit negative = op1.getBit(0).xor(op2.getBit(0));
+        var negative = op1.getBit(0).xor(op2.getBit(0));
         // if either are negative, flip to positve and switch result sign later
         if (op1.getBit(0).getValue())
             op1 = getTwosCompliment(op1);
         if (op2.getBit(0).getValue())
             op2 = getTwosCompliment(op2);
 
-        LinkedList<Word> intermediateProducts = new LinkedList<>();
-        int placeholderNumber = 0;
+        var intermediateProducts = new LinkedList<Word>();
+        var placeholderNumber = 0;
         /*
          * Take each bit in op2 and multiply it with all of op1,
          * then take results and add them together.
          */
         for (int i = 31; i >= 1; i--) {
-            Word word = new Word();
+            var word = new Word();
             for (int j = 31; j >= 1; j--)
                 word.setBit(j, op2.getBit(i).and(op1.getBit(j)));
             word = word.leftShift(placeholderNumber);
             intermediateProducts.add(word);
             placeholderNumber++;
         }
-        Word output = new Word();
+        var output = new Word();
         for (Word iterator : intermediateProducts) {
             output = add2(output, iterator);
         }
@@ -318,7 +296,7 @@ public class ALU {
     }
 
     public Word getResult() {
-        Word word = new Word();
+        var word = new Word();
         word.copy(result);
         return word;
     }

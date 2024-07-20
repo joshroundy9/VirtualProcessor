@@ -1,3 +1,4 @@
+package main;
 public class InstructionCache {
     //eight sequential words in memory
     private Word[] mainCache;

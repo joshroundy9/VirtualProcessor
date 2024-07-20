@@ -1,6 +1,10 @@
+package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
+
+import main.ALU;
+import main.Bit;
 
 public class ALUTests {
    /* @Test

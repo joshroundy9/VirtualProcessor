@@ -1,3 +1,5 @@
+package main;
+
 public class MainMemory {
 
     private static Word[] memory = new Word[1024];
@@ -12,8 +14,8 @@ public class MainMemory {
     public static Word read(Word address)
     {
         System.out.println("MAIN MEMORY READ: "+address.getSigned());
-        Word word = new Word();
-        int index = (int) address.getUnsigned();
+        var word = new Word();
+        var index = (int) address.getUnsigned();
         //if the index has not been initialized, return an empty word.
         if(memory[index] != null)
             word.copy(memory[index]);
@@ -26,13 +28,13 @@ public class MainMemory {
      */
     public static void write(Word address, Word value)
     {
-        int index = (int)address.getUnsigned();
+        var index = (int)address.getUnsigned();
         /*if the memory index is not initialized,
          * we create a new word, set its value, then set
          * the memory index to point to it. */
         if(memory[index] == null)
         {
-            Word word = new Word();
+            var word = new Word();
             word.copy(value);
             memory[index] = word;
         } else 
@@ -43,7 +45,7 @@ public class MainMemory {
      */
     public static void load(String[] data)
     {
-        Word address = new Word();
+        var address = new Word();
         for(int i = 0;i<data.length;i++)
         {
             Word word = new Word();

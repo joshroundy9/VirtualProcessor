@@ -1,3 +1,5 @@
+package main;
+
 public class Processor {
     private Word pc, sp, instruction,
             opcode, rd, function, rs1, rs2, immediate, result;
@@ -62,7 +64,8 @@ public class Processor {
      * depending on the last two bits of the instruction.
      */
     public void decode() {
-        Word mask = new Word(), instructionTemp = new Word();
+        var mask = new Word();
+        var instructionTemp = new Word();
         mask.set(31);
         opcode = instruction.and(mask);
         instructionTemp = instruction.rightShift(5);

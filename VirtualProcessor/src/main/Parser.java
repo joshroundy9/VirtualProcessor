@@ -1,7 +1,10 @@
+package main;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.Set;
+
+import main.Token.tokenType;
 
 public class Parser {
 
@@ -15,8 +18,16 @@ public class Parser {
         program = new LinkedList<>();
         this.tokenList = tokenList;
         statementTokens = new HashSet<>();
-        MOPTokens = new HashSet<>();
-        BOPTokens = new HashSet<>();
+        MOPTokens = (HashSet<tokenType>) Set.of(
+        Token.tokenType.ADD,
+        Token.tokenType.MULTIPLY,
+        Token.tokenType.SUBTRACT);
+        BOPTokens = (HashSet<tokenType>) Set.of(Token.tokenType.EQUAL,
+        Token.tokenType.NOTEQUAL,
+        Token.tokenType.LESS,
+        Token.tokenType.GREATER,
+        Token.tokenType.GREATEROREQUAL,
+        Token.tokenType.LESSOREQUAL);
         statementTokens.add(Token.tokenType.MATH);
         statementTokens.add(Token.tokenType.BRANCH);
         statementTokens.add(Token.tokenType.HALT);
@@ -30,18 +41,6 @@ public class Parser {
         statementTokens.add(Token.tokenType.RETURN);
         statementTokens.add(Token.tokenType.PEEK);
         statementTokens.add(Token.tokenType.INTERRUPT);
-
-        MOPTokens.add(Token.tokenType.ADD);
-        MOPTokens.add(Token.tokenType.MULTIPLY);
-        MOPTokens.add(Token.tokenType.SUBTRACT);
-
-        BOPTokens.add(Token.tokenType.EQUAL);
-        BOPTokens.add(Token.tokenType.NOTEQUAL);
-        BOPTokens.add(Token.tokenType.LESS);
-        BOPTokens.add(Token.tokenType.GREATER);
-        BOPTokens.add(Token.tokenType.GREATEROREQUAL);
-        BOPTokens.add(Token.tokenType.LESSOREQUAL);
-
     }
 
     /*
@@ -71,8 +70,8 @@ public class Parser {
     private Word parseStatement() throws Exception {
         if (!statementTokens.contains(tokenList.peek().getType()))
             throw new Exception("Each line must begin with a statement type.");
-        Token statement = tokenList.remove();
-        Word word = new Word();
+        var statement = tokenList.remove();
+        var word = new Word();
         switch (statement.getType()) {
             case MATH:
                 /*
@@ -159,7 +158,7 @@ public class Parser {
             case JUMP:
                 // for this one, I decided to explicitly ask the user if its for the nor or dest
                 // only version
-                Token type = tokenList.removeFirst();
+                var type = tokenList.removeFirst();
                 number = matchAndRemove(Token.tokenType.NUMBER);
                 switch (type.getType()) {
                     case DEST_ONLY:
@@ -214,7 +213,7 @@ public class Parser {
                 // find if the math statement is 2r or 3r
                 if (tokenList.size() < 5)
                     throw new Exception("Call operation must be followed by two or three registers and a number.");
-                Token[] tempTokenStorage = new Token[] {
+                    var tempTokenStorage = new Token[] {
                         tokenList.removeFirst(), matchAndRemove(Token.tokenType.REGISTER),
                         matchAndRemove(Token.tokenType.REGISTER), tokenList.removeFirst(),
                         tokenList.removeFirst() };
@@ -287,7 +286,7 @@ public class Parser {
 
             case POP:
                 /* Format: pop REGISTER */
-                Token token = matchAndRemove(Token.tokenType.REGISTER);
+                var token = matchAndRemove(Token.tokenType.REGISTER);
                 if (token == null)
                     throw new Exception("Statement pop must be followed by a register.");
                 word = new Word(token.getValue());

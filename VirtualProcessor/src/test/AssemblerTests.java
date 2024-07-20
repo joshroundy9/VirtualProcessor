@@ -1,31 +1,33 @@
+package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.LinkedList;
-import java.util.List;
 
 import org.junit.Test;
+
+import main.Lexer;
+import main.Parser;
+import main.Token;
 
 public class AssemblerTests {
 
     @Test
     public void LexerTest() throws Exception {
         /* YOU WILL HAVE TO CHANGE FILE PATH!!!!! */
-        List<String> lines = Files.readAllLines(Paths.get("C:/Users/milli/Dropbox/ICSI 404/404/src/assembly"),
+        var lines = Files.readAllLines(Paths.get("C:/Users/milli/Dropbox/ICSI 404/404/src/assembly"),
                 StandardCharsets.UTF_8);
 
-        Lexer lex = new Lexer();
+        var lexer = new Lexer();
         for (int i = 0; i < lines.size(); i++) {
-            lex.lex(lines.get(i), i + 1, lines.size());
+            lexer.lex(lines.get(i), i + 1, lines.size());
         }
         // prints tokens
-        for (Token token : lex.getTokens()) {
+        for (Token token : lexer.getTokens()) {
             token.print();
         }
-        List<Token> tokenList = lex.getTokens();
+        var tokenList = lexer.getTokens();
         assertEquals(Token.tokenType.MATH, tokenList.get(0).getType());
         assertEquals(Token.tokenType.ADD, tokenList.get(1).getType());
         assertEquals(Token.tokenType.REGISTER, tokenList.get(2).getType());
@@ -47,23 +49,20 @@ public class AssemblerTests {
     @Test
     public void ParserTest() throws Exception {
         /* YOU WILL HAVE TO CHANGE FILE PATH!!!!! */
-        List<String> lines = Files.readAllLines(Paths.get("/Users/joshr/Dropbox/ICSI 404/404/src/assembly"),
+        var lines = Files.readAllLines(Paths.get("/Users/joshr/Dropbox/VirtualProcessor/VirtualProcessor/src/test/assembly"),
                 StandardCharsets.UTF_8);
 
-        Lexer lex = new Lexer();
+        var lexer = new Lexer();
         for (int i = 0; i < lines.size(); i++) {
-            lex.lex(lines.get(i), i + 1, lines.size());
+            lexer.lex(lines.get(i), i + 1, lines.size());
         }
         // prints tokens
-        for (Token token : lex.getTokens()) {
-            token.print();
-        }
-        LinkedList<Token> tokenList = lex.getTokens();
-        Parser parser = new Parser(tokenList);
+
+        lexer.getTokens().forEach(token -> token.print());
+        var parser = new Parser(lexer.getTokens());
         parser.parse();
-        for (Word word : parser.getProgram()) {
-            System.out.println(word);
-        }
+        parser.getProgram()
+        .forEach(word -> System.out.println(word));
         /*MATH ADD R1 R2 R3
          * = 00000000 00001 00010 1110 00011 00010
          *   LOAD R1 100

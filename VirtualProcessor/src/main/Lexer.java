@@ -1,8 +1,7 @@
-import java.util.ArrayList;
+package main;
+
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Lexer {
 
@@ -57,15 +56,15 @@ public class Lexer {
      */
     public void lex(String lineString,int currentLine, int totalLines) throws Exception {
         
-        char[] charArray = lineString.toCharArray();
-        String currentWord = "";
+        var charArray = lineString.toCharArray();
+        var currentWord = "";
         for(int i = 0;i<charArray.length;i++)
         {
             char character = charArray[i];
             //in the case of register, always check for numbers after it.
             if(character == 'R' || character == 'r' && currentWord.equals(""))
             {
-                String currentNumber = "";
+                var currentNumber = "";
                 i++;
                 character = charArray[i];
                 //if no number is found after the R, default to a value of 0
@@ -111,7 +110,7 @@ public class Lexer {
     public void createWordIfPossible(String accString) throws Exception {
         if (!accString.equals("")) {
             Token last;
-            boolean isNumber = Character.isDigit(accString.toCharArray()[0]);
+            var isNumber = Character.isDigit(accString.toCharArray()[0]);
             if(isNumber)
                 last = new Token(Integer.parseInt(accString), Token.tokenType.NUMBER);
              else {

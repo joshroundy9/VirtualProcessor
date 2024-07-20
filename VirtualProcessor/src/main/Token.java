@@ -1,5 +1,6 @@
+package main;
 public class Token {
-    enum tokenType{
+    public enum tokenType{
         MATH, ADD, SUBTRACT, MULTIPLY, AND, OR, NOT, XOR, COPY, HALT, BRANCH, JUMP,
         CALL, PUSH, LOAD, RETURN, STORE, PEEK, POP, INTERRUPT, EQUAL, UNEQUAL, GREATER, LESS
         ,GREATEROREQUAL,LESSOREQUAL, SHIFT, LEFT, RIGHT, NUMBER, REGISTER

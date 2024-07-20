@@ -1,8 +1,12 @@
+package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Random;
 
 import org.junit.Test;
+
+import main.Bit;
+import main.Word;
 
 public class WordTests {
     @Test
@@ -10,14 +14,14 @@ public class WordTests {
         /*
          * Makes two random words and tests each bit for the output.
          */
-        Word word = new Word();
-        Word word2 = new Word();
-        Random random = new Random();
+        var word = new Word();
+        var word2 = new Word();
+        var random = new Random();
         for (int i = 0; i < 32; i++) {
             word.setBit(i, new Bit(random.nextBoolean()));
             word2.setBit(i, new Bit(random.nextBoolean()));
         }
-        Word word3 = word.and(word2);
+        var word3 = word.and(word2);
         for (int i = 0; i < 32; i++)
             assertEquals(word.getBit(i).getValue() && word2.getBit(i).getValue(), word3.getBit(i).getValue());
 
@@ -25,13 +29,13 @@ public class WordTests {
 
     @Test
     public void testCopy() {
-        Word word = new Word();
+        var word = new Word();
 
-        Random random = new Random();
+        var random = new Random();
         for (int i = 0; i < 32; i++)
             word.setBit(i, new Bit(random.nextBoolean()));
 
-        Word word2 = new Word();
+        var word2 = new Word();
         word2.copy(word);
         for (int i = 0; i < 32; i++)
             assertEquals(word2.getBit(i).getValue(), word.getBit(i).getValue());
@@ -40,14 +44,14 @@ public class WordTests {
 
     @Test
     public void testGetBit() {
-        Word word = new Word();
+        var word = new Word();
         word.setBit(3, new Bit(true));
         assertEquals(word.getBit(3).getValue(), true);
     }
 
     @Test
     public void testGetSigned() {
-        Word word = new Word();
+        var word = new Word();
         word.set(-15);
         assertEquals(word.getSigned(), -15);
         word.set(15);

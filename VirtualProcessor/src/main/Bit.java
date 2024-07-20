@@ -1,3 +1,4 @@
+package main;
 public class Bit {
     private Boolean value;
     public Bit(Boolean value)
